@@ -117,5 +117,23 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should only clear current entry when clear is pressed once")
+    void testClearOnceKeepsPendingOperation() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(7);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressClearKey();
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        String expected = "11";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 }
 
